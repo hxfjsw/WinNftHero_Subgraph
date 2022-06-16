@@ -2,7 +2,11 @@
 
 type Owner @entity {
   id: ID!
+
+  #ERC721
   erc721_token: [ERC721_Token!]! @derivedFrom(field: "owner")
+  erc721_fromTransfers: [ERC721_Transfer!]! @derivedFrom(field: "from")
+  erc721_toTransfers: [ERC721_Transfer!]! @derivedFrom(field: "to")
 #  balance: BigInt
 
   #ERC20
@@ -12,6 +16,8 @@ type Owner @entity {
   erc20_fromTransfers: [ERC20_Transfer!]! @derivedFrom(field: "from")
   erc20_toTransfers: [ERC20_Transfer!]! @derivedFrom(field: "to")
   erc20_balance: [ERC20_Balance!]! @derivedFrom(field: "owner")
+
+  #Auction
 
 }
 
