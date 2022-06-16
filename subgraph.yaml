@@ -24,4 +24,50 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mappings/hero_mappings.ts
+
+  - kind: ethereum/contract
+    name: ApeNftToken
+    network: rinkeby
+    source:
+      abi: ERC20
+      address: "0x13eBC0a1fEe2F7E5A1809712957229B70fd77BF2"
+      startBlock: 10116535
+    mapping:
+      file: ./src/mappings/apenft_token_mappings.ts
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Token
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+
+  - kind: ethereum/contract
+    name: WinkToken
+    network: rinkeby
+    source:
+      abi: ERC20
+      address: "0xa1c10bff87d045a44505bc2a8e3854b328a42b4c"
+      startBlock: 10357682
+    mapping:
+      file: ./src/mappings/wink_mappings.ts
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      entities:
+        - Token
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer

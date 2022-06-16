@@ -1,0 +1,1 @@
+graph deploy --studio winnfthero_rinkeby
