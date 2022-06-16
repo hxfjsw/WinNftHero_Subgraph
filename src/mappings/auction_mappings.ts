@@ -1,21 +1,30 @@
 import { BigInt } from "@graphprotocol/graph-ts"
 import {
     Auction,
-    AuctionCancelled,
-    AuctionCreated,
-    AuctionSuccessful,
+    AuctionCancelled as AuctionCancelledEvent,
+    AuctionCreated as AuctionCreatedEvent,
+    AuctionSuccessful as AuctionSuccessfulEvent,
     OwnershipTransferred,
     Paused,
     Unpaused
 } from "../../generated/Auction/Auction"
-import { Auction_Created,Auction_Cancelled } from "../../generated/schema"
+import {Auction_Created, Auction_Cancelled, Auction_Successful} from "../../generated/schema"
 
-export function handleAuctionCancelled(event: AuctionCancelled): void {
+export function handleAuctionCancelled(event: AuctionCancelledEvent): void {
+    let entity = Auction_Cancelled.load(event.transaction.from.toHex())
 
+    if (!entity) {
+        entity = new Auction_Cancelled(event.transaction.from.toHex())
+    }
 
+    entity.nftAddress = event.params._nftAddress;
+    entity.tokenId = event.params._tokenId;
+    entity.timestamp = event.block.timestamp;
+
+    entity.save()
 }
 
-export function handleAuctionCreated(event: AuctionCreated): void {
+export function handleAuctionCreated(event: AuctionCreatedEvent): void {
 
     let entity = Auction_Created.load(event.transaction.from.toHex())
 
@@ -29,12 +38,24 @@ export function handleAuctionCreated(event: AuctionCreated): void {
     entity.endingPrice = event.params._endingPrice;
     entity.tokenId = event.params._tokenId;
     entity.nftAddress = event.params._nftAddress;
-
+    entity.timestamp = event.block.timestamp;
     entity.save()
 }
 
-export function handleAuctionSuccessful(event: AuctionSuccessful): void {
+export function handleAuctionSuccessful(event: AuctionSuccessfulEvent): void {
+    let entity = Auction_Successful.load(event.transaction.from.toHex())
 
+    if (!entity) {
+        entity = new Auction_Successful(event.transaction.from.toHex())
+    }
+
+    entity.seller = event.params._seller;
+    entity.winer = event.params._winner;
+    entity.totalPrice = event.params._totalPrice;
+    entity.tokenId = event.params._tokenId;
+    entity.nftAddress = event.params._nftAddress;
+    entity.timestamp = event.block.timestamp;
+    entity.save()
 }
 
 export function handleOwnershipTransferred(event: OwnershipTransferred): void {}
