@@ -95,24 +95,32 @@ type ERC20_Balance @entity {
 
 ###Auction
 
-type AuctionCreatedEntity @entity {
+type Auction @entity {
   id: ID!
-  count: BigInt!
   nftAddress: Bytes! # address
   tokenId: BigInt! # uint256
   seller: Bytes! # address
   duration: BigInt! # uint256
   startingPrice: BigInt! # uint256
   endingPrice: BigInt! # uint256
-  txid:Bytes!
 }
 
-type AuctionSuccessfulEntity @entity {
+type Auction_Created @entity {
+  id: ID!
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+  seller: Bytes! # address
+  duration: BigInt! # uint256
+  startingPrice: BigInt! # uint256
+  endingPrice: BigInt! # uint256
+}
+
+type Auction_Successful @entity {
   id: ID!
   count: BigInt!
 }
 
-type AuctionCancelledEntity @entity {
+type Auction_Cancelled @entity {
   id: ID!
   count: BigInt!
 }
