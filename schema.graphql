@@ -151,3 +151,13 @@ type Auction_Month  @entity {
     totalVolume: BigInt! # uint256
     totalSold: BigInt! # uint256
 }
+
+type Recharge  @entity {
+    id: ID!
+    from: Bytes! # address
+    to: Bytes! # address
+    amount: BigInt! # uint256
+    order_id: BigInt! # uint256
+    token: Bytes! # address
+    timestamp: BigInt!
+}
