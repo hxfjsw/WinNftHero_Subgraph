@@ -1,5 +1,5 @@
 import { log, BigInt } from '@graphprotocol/graph-ts';
-import { ERC721, Transfer as TransferEvent } from '../generated/ERC721/ERC721';
+import { ERC721, Transfer as TransferEvent } from '../generated/WinNftHero/ERC721';
 import { Token, Owner, Contract, Transfer } from '../generated/schema';
 
 export function handleTransfer(event: TransferEvent): void {
@@ -25,7 +25,9 @@ export function handleTransfer(event: TransferEvent): void {
     previousOwner.balance = BigInt.fromI32(0);
   } else {
     let prevBalance = previousOwner.balance;
+    // @ts-ignore
     if (prevBalance > BigInt.fromI32(0)) {
+      // @ts-ignore
       previousOwner.balance = prevBalance - BigInt.fromI32(1);
     }
   }
@@ -35,6 +37,7 @@ export function handleTransfer(event: TransferEvent): void {
     newOwner.balance = BigInt.fromI32(1);
   } else {
     let prevBalance = newOwner.balance;
+    // @ts-ignore
     newOwner.balance = prevBalance + BigInt.fromI32(1);
   }
 
