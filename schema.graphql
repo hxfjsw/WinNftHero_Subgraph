@@ -1,134 +1,153 @@
-
-
 type Owner @entity {
-  id: ID!
+    id: ID!
 
-  #ERC721
-  erc721_token: [ERC721_Token!]! @derivedFrom(field: "owner")
-  erc721_fromTransfers: [ERC721_Transfer!]! @derivedFrom(field: "from")
-  erc721_toTransfers: [ERC721_Transfer!]! @derivedFrom(field: "to")
-#  balance: BigInt
+    #ERC721
+    erc721_token: [ERC721_Token!]! @derivedFrom(field: "owner")
+    erc721_fromTransfers: [ERC721_Transfer!]! @derivedFrom(field: "from")
+    erc721_toTransfers: [ERC721_Transfer!]! @derivedFrom(field: "to")
+    #  balance: BigInt
 
-  #ERC20
-#  erc20_contract: ERC20_Contract!
-  erc20_ownerAllowances: [ERC20_Allowance!]! @derivedFrom(field: "owner")
-  erc20_spenderAllowances: [ERC20_Allowance!]! @derivedFrom(field: "spender")
-  erc20_fromTransfers: [ERC20_Transfer!]! @derivedFrom(field: "from")
-  erc20_toTransfers: [ERC20_Transfer!]! @derivedFrom(field: "to")
-  erc20_balance: [ERC20_Balance!]! @derivedFrom(field: "owner")
+    #ERC20
+    #  erc20_contract: ERC20_Contract!
+    erc20_ownerAllowances: [ERC20_Allowance!]! @derivedFrom(field: "owner")
+    erc20_spenderAllowances: [ERC20_Allowance!]! @derivedFrom(field: "spender")
+    erc20_fromTransfers: [ERC20_Transfer!]! @derivedFrom(field: "from")
+    erc20_toTransfers: [ERC20_Transfer!]! @derivedFrom(field: "to")
+    erc20_balance: [ERC20_Balance!]! @derivedFrom(field: "owner")
 
-  #Auction
+    #Auction
 
 }
 
 ##ERC721
 
 type ERC721_Token @entity {
-  id: ID!
-  owner: Owner
-  uri: String
-  transfers: [ERC721_Transfer!]! @derivedFrom(field: "token")
-  contract: ERC721_Contract
+    id: ID!
+    owner: Owner
+    uri: String
+    transfers: [ERC721_Transfer!]! @derivedFrom(field: "token")
+    contract: ERC721_Contract
 }
 
 type ERC721_Contract @entity {
-  id: ID!
-  name: String
-  symbol: String
-  totalSupply: BigInt
-  mintedTokens: [ERC721_Token!]! @derivedFrom(field: "contract")
+    id: ID!
+    name: String
+    symbol: String
+    totalSupply: BigInt
+    mintedTokens: [ERC721_Token!]! @derivedFrom(field: "contract")
 }
 
 type ERC721_Transfer @entity {
-  id: ID!
-  token: ERC721_Token!
-  # Empty from is minting
-  from: Owner
-  # Empty to is burning
-  to: Owner
-  timestamp: BigInt!
-  block: BigInt!
-  transactionHash: String!
+    id: ID!
+    token: ERC721_Token!
+    # Empty from is minting
+    from: Owner
+    # Empty to is burning
+    to: Owner
+    timestamp: BigInt!
+    block: BigInt!
+    transactionHash: String!
 }
 
 
 ##ERC20
 type ERC20_Contract @entity {
-  id: ID! # address
-  decimals: Int!
-  name: String!
-  symbol: String!
-  # ---------------------------------- state ----------------------------------
-  totalSupply: BigInt!
-  # ---------------------------------- links ----------------------------------
-  transfers: [ERC20_Transfer!]! @derivedFrom(field: "token")
-  allowances: [ERC20_Allowance!]! @derivedFrom(field: "token")
-#  holders: [Owner!]! @derivedFrom(field: "erc20_contract")
+    id: ID! # address
+    decimals: Int!
+    name: String!
+    symbol: String!
+    # ---------------------------------- state ----------------------------------
+    totalSupply: BigInt!
+    # ---------------------------------- links ----------------------------------
+    transfers: [ERC20_Transfer!]! @derivedFrom(field: "token")
+    allowances: [ERC20_Allowance!]! @derivedFrom(field: "token")
+    #  holders: [Owner!]! @derivedFrom(field: "erc20_contract")
 }
 
 type ERC20_Transfer @entity {
-  id: ID! # tx
-  value: BigInt!
-  from: Owner!
-  to: Owner!
-  token: ERC20_Contract!
-  timestamp: BigInt!
+    id: ID! # tx
+    value: BigInt!
+    from: Owner!
+    to: Owner!
+    token: ERC20_Contract!
+    timestamp: BigInt!
 }
 
 type ERC20_Allowance @entity {
-  id: ID! # token-owner-spender
-  # ---------------------------------- state ----------------------------------
-  value: BigInt!
-  timestamp: BigInt!
-  # ---------------------------------- links ----------------------------------
-  token: ERC20_Contract!
-  owner: Owner!
-  spender: Owner!
+    id: ID! # token-owner-spender
+    # ---------------------------------- state ----------------------------------
+    value: BigInt!
+    timestamp: BigInt!
+    # ---------------------------------- links ----------------------------------
+    token: ERC20_Contract!
+    owner: Owner!
+    spender: Owner!
 }
 
 type ERC20_Balance @entity {
-  id: ID!
-  amount: BigInt!
-  tokenAddress: Bytes! # address
-  owner: Owner!
+    id: ID!
+    amount: BigInt!
+    tokenAddress: Bytes! # address
+    owner: Owner!
 }
 
 ###Auction
 
 type Auction @entity {
-  id: ID!
-  nftAddress: Bytes! # address
-  tokenId: BigInt! # uint256
-  seller: Bytes! # address
-  duration: BigInt! # uint256
-  startingPrice: BigInt! # uint256
-  endingPrice: BigInt! # uint256
+    id: ID!
+    nftAddress: Bytes! # address
+    tokenId: BigInt! # uint256
+    seller: Bytes! # address
+    duration: BigInt! # uint256
+    startingPrice: BigInt! # uint256
+    endingPrice: BigInt! # uint256
 }
 
 type Auction_Created @entity {
-  id: ID!
-  nftAddress: Bytes! # address
-  tokenId: BigInt! # uint256
-  seller: Bytes! # address
-  duration: BigInt! # uint256
-  startingPrice: BigInt! # uint256
-  endingPrice: BigInt! # uint256
-  timestamp: BigInt!
+    id: ID!
+    nftAddress: Bytes! # address
+    tokenId: BigInt! # uint256
+    seller: Bytes! # address
+    duration: BigInt! # uint256
+    startingPrice: BigInt! # uint256
+    endingPrice: BigInt! # uint256
+    timestamp: BigInt!
 }
 
 type Auction_Successful @entity {
-  id: ID!
-  nftAddress: Bytes! # address
-  tokenId: BigInt! # uint256
-  timestamp: BigInt!
-  seller: Bytes! # address
-  winer: Bytes! # address
-  totalPrice: BigInt! # uint256
+    id: ID!
+    nftAddress: Bytes! # address
+    tokenId: BigInt! # uint256
+    timestamp: BigInt!
+    seller: Bytes! # address
+    winer: Bytes! # address
+    totalPrice: BigInt! # uint256
 }
 
 type Auction_Cancelled @entity {
-  id: ID!
-  nftAddress: Bytes! # address
-  tokenId: BigInt! # uint256
-  timestamp: BigInt!
+    id: ID!
+    nftAddress: Bytes! # address
+    tokenId: BigInt! # uint256
+    timestamp: BigInt!
+}
+
+type Auction_Day  @entity {
+    id: ID!
+    totalSale: BigInt! # uint256
+    totalVolume: BigInt! # uint256
+    totalSold: BigInt! # uint256
+}
+
+type Auction_Week  @entity {
+    id: ID!
+    totalSale: BigInt! # uint256
+    totalVolume: BigInt! # uint256
+    totalSold: BigInt! # uint256
+}
+
+type Auction_Month  @entity {
+    id: ID!
+    totalSale: BigInt! # uint256
+    totalVolume: BigInt! # uint256
+    totalSold: BigInt! # uint256
 }
