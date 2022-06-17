@@ -1,36 +1,56 @@
+"""用户信息"""
 type Owner @entity {
+    """钱包地址"""
     id: ID!
 
     #ERC721
     erc721_token: [ERC721_Token!]! @derivedFrom(field: "owner")
+    """NFT接收记录"""
     erc721_fromTransfers: [ERC721_Transfer!]! @derivedFrom(field: "from")
+    """NFT发送记录"""
     erc721_toTransfers: [ERC721_Transfer!]! @derivedFrom(field: "to")
     #  balance: BigInt
 
     #ERC20
     #  erc20_contract: ERC20_Contract!
+    """代币接收授信记录"""
     erc20_ownerAllowances: [ERC20_Allowance!]! @derivedFrom(field: "owner")
+    """代币授信给别人的记录"""
     erc20_spenderAllowances: [ERC20_Allowance!]! @derivedFrom(field: "spender")
+    """代币接收记录"""
     erc20_fromTransfers: [ERC20_Transfer!]! @derivedFrom(field: "from")
+    """代币接收记录"""
     erc20_toTransfers: [ERC20_Transfer!]! @derivedFrom(field: "to")
+    """代币持有量"""
     erc20_balance: [ERC20_Balance!]! @derivedFrom(field: "owner")
 
-    #Auction
+    """上架道具"""
+    actions:[Auction!]! @derivedFrom(field: "seller")
+
+    """充值记录"""
+    recharges: [Recharge!]! @derivedFrom(field: "to")
 
 }
 
 ##ERC721
 
 type ERC721_Token @entity {
+
     id: ID!
+
     owner: Owner
+
     uri: String
+
     transfers: [ERC721_Transfer!]! @derivedFrom(field: "token")
+
     contract: ERC721_Contract
 }
 
 type ERC721_Contract @entity {
+    """合约号"""
     id: ID!
+    """名字"""
     name: String
     symbol: String
     totalSupply: BigInt
@@ -38,56 +58,75 @@ type ERC721_Contract @entity {
 }
 
 type ERC721_Transfer @entity {
+    """交易号（TXID）"""
     id: ID!
     token: ERC721_Token!
     # Empty from is minting
     from: Owner
     # Empty to is burning
     to: Owner
+    """时间戳"""
     timestamp: BigInt!
     block: BigInt!
     transactionHash: String!
 }
 
 
-##ERC20
+
 type ERC20_Contract @entity {
+    """合约地址"""
     id: ID! # address
+    """精度"""
     decimals: Int!
+    """名字"""
     name: String!
+    """代号"""
     symbol: String!
-    # ---------------------------------- state ----------------------------------
+    """发行量"""
     totalSupply: BigInt!
-    # ---------------------------------- links ----------------------------------
+    """转账记录"""
     transfers: [ERC20_Transfer!]! @derivedFrom(field: "token")
+    """"授信记录"""
     allowances: [ERC20_Allowance!]! @derivedFrom(field: "token")
     #  holders: [Owner!]! @derivedFrom(field: "erc20_contract")
 }
 
 type ERC20_Transfer @entity {
+    """交易号（TXID）"""
     id: ID! # tx
+    """金额"""
     value: BigInt!
+    """发送着"""
     from: Owner!
+    """接收者"""
     to: Owner!
+    """代币信息"""
     token: ERC20_Contract!
+    """时间戳"""
     timestamp: BigInt!
 }
 
 type ERC20_Allowance @entity {
+
     id: ID! # token-owner-spender
     # ---------------------------------- state ----------------------------------
     value: BigInt!
+    """时间戳"""
     timestamp: BigInt!
-    # ---------------------------------- links ----------------------------------
+    """代币信息"""
     token: ERC20_Contract!
+    """代币持有者"""
     owner: Owner!
+    """代币被授信使用者"""
     spender: Owner!
 }
 
 type ERC20_Balance @entity {
     id: ID!
+    """持有量"""
     amount: BigInt!
     tokenAddress: Bytes! # address
+    """拥有者"""
     owner: Owner!
 }
 
@@ -97,123 +136,123 @@ type Auction @entity {
     id: ID!
     nftAddress: Bytes! # address
     tokenId: BigInt! # uint256
-    seller: Bytes! # address
+    #    seller: Bytes! # address
+    seller: Owner!
     duration: BigInt! # uint256
     startingPrice: BigInt! # uint256
     endingPrice: BigInt! # uint256
 }
 
 type Auction_Created @entity {
+    """交易号（TXID）"""
     id: ID!
     nftAddress: Bytes! # address
     tokenId: BigInt! # uint256
+    """挂牌者"""
     seller: Bytes! # address
+    """上架时间"""
     duration: BigInt! # uint256
+    """起始价"""
     startingPrice: BigInt! # uint256
+    """结束价"""
     endingPrice: BigInt! # uint256
+    """时间戳"""
     timestamp: BigInt!
 }
 
 type Auction_Successful @entity {
+    """交易号（TXID）"""
     id: ID!
     nftAddress: Bytes! # address
     tokenId: BigInt! # uint256
+    """时间戳"""
     timestamp: BigInt!
+    """出售者"""
     seller: Bytes! # address
+    """购买者"""
     winer: Bytes! # address
+    """成交价"""
     totalPrice: BigInt! # uint256
 }
 
 type Auction_Cancelled @entity {
+    """交易号（TXID）"""
     id: ID!
     nftAddress: Bytes! # address
+    """NFT的ID"""
     tokenId: BigInt! # uint256
+    """时间戳"""
     timestamp: BigInt!
 }
 
 type Auction_Day  @entity {
+    """天的时间戳，0表示所有（Alldays）"""
     id: ID!
+    """总出售量"""
     totalSale: BigInt! # uint256
+    """总成交金额"""
     totalVolume: BigInt! # uint256
+    """总成交量"""
     totalSold: BigInt! # uint256
 }
 
 type Auction_Week  @entity {
+    """星期的时间戳"""
     id: ID!
+    """总出售量"""
     totalSale: BigInt! # uint256
+    """总成交金额"""
     totalVolume: BigInt! # uint256
+    """总成交量"""
     totalSold: BigInt! # uint256
 }
 
 type Auction_Month  @entity {
+    """月份的时间戳"""
     id: ID!
+    """总出售量"""
     totalSale: BigInt! # uint256
+    """总成交金额"""
     totalVolume: BigInt! # uint256
+    """总成交量"""
     totalSold: BigInt! # uint256
 }
 
 
 "充值记录"
 type Recharge  @entity {
-    """
-    交易号（TXID）
-    """
+    """交易号（TXID）"""
     id: ID!
-    """
-    付费者钱包地址
-    """
+    """付费者钱包地址"""
     from: Bytes! # address
-    """
-    目标钱包地址
-    """
-    to: Bytes! # address
-    """
-    金额
-    """
+    """目标钱包地址"""
+    #    to: Bytes! # address
+    to: Owner!
+    """金额"""
     amount: BigInt! # uint256
-    """
-    订单号
-    """
+    """订单号"""
     order_id: BigInt! # uint256
-    """
-    ERC20合约地址 元币为空地址
-    """
+    """ERC20合约地址 元币为空地址"""
     token: Bytes! # address
-    """
-    时间戳
-    """
+    """时间戳"""
     timestamp: BigInt!
 }
 
 
 "盲盒记录"
 type MysteryBoxExchange  @entity {
-    """
-    交易号（TXID）
-    """
+    """交易号（TXID）"""
     id: ID!
-    """
-    基因
-    """
+    """基因"""
     genes: BigInt! # uint256
-    """
-    盲盒ID
-    """
+    """盲盒ID"""
     token_id: BigInt! # uint256
-    """
-    兑换后产生的NFT合约ID
-    """
+    """兑换后产生的NFT合约ID"""
     nft_token_id: BigInt! # uint256
-    """
-    兑换发起者
-    """
+    """兑换发起者"""
     from: Bytes! # address
-    """
-    兑换目标合约地址
-    """
+    """兑换目标合约地址"""
     nft_address: Bytes! # address
-    """
-    时间戳
-    """
+    """时间戳"""
     timestamp: BigInt!
 }

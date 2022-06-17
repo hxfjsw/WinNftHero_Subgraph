@@ -22,7 +22,7 @@ export function handleRecharge(event: RechargeEvent): void {
     }
 
     entity.from = event.params.from;
-    entity.to = event.params.to;
+    entity.to = event.params.to.toHexString();//event.params.to;
     entity.amount = event.params.amount;
     entity.order_id = event.params.order_id;
     entity.token = event.params.token_address;
