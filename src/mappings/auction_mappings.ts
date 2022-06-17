@@ -18,7 +18,7 @@ import {
     AuctionInfo
 } from "../../generated/schema"
 
-import {ZERO_BI, ADDRESS_ZERO} from "../helpers/const";
+import {ZERO_BI, ADDRESS_ZERO, ONE_BI} from "../helpers/const";
 
 
 export function handleAuctionCancelled(event: AuctionCancelledEvent): void {
@@ -105,13 +105,13 @@ export function handleAuctionCreated(event: AuctionCreatedEvent): void {
 
 
     // @ts-ignore
-    day.totalSale = day.totalSale + BigInt.fromI32(1)
+    day.totalSale = day.totalSale + ONE_BI
     // @ts-ignore
-    week.totalSale = week.totalSale + BigInt.fromI32(1)
+    week.totalSale = week.totalSale + ONE_BI
     // @ts-ignore
-    month.totalSale = month.totalSale + BigInt.fromI32(1)
+    month.totalSale = month.totalSale + ONE_BI
     // @ts-ignore
-    alldays.totalSale = alldays.totalSale + BigInt.fromI32(1)
+    alldays.totalSale = alldays.totalSale + ONE_BI
 
     day.save();
     week.save();
@@ -199,13 +199,13 @@ export function handleAuctionSuccessful(event: AuctionSuccessfulEvent): void {
 
 
     // @ts-ignore
-    day.totalSold = day.totalSold + BigInt.fromI32(1)
+    day.totalSold = day.totalSold + ONE_BI
     // @ts-ignore
-    week.totalSold = week.totalSold + BigInt.fromI32(1)
+    week.totalSold = week.totalSold + ONE_BI
     // @ts-ignore
-    month.totalSold = month.totalSold + BigInt.fromI32(1)
+    month.totalSold = month.totalSold + ONE_BI
     // @ts-ignore
-    alldays.totalSold = alldays.totalSold + BigInt.fromI32(1)
+    alldays.totalSold = alldays.totalSold + ONE_BI
 
     // @ts-ignore
     day.totalVolume = day.totalVolume + event.params._totalPrice;
