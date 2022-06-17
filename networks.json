@@ -1,7 +1,42 @@
 {
   "rinkeby": {
-    "WinNftHeroContract": {
-      "address": "0x7b5a201e0b5c405288986deb876fed7efce0bed5"
+    "WinNftHero": {
+      "address": "0x7b5a201e0b5c405288986deb876fed7efce0bed5",
+      "startBlock": 10644199
+    },
+    "WinNftHeroEquip": {
+      "address": "0x748f5cd3989849f3cb96c84c6f5d3c132f6e6623",
+      "startBlock": 10644202
+    },
+    "ApeNftToken": {
+      "address": "0x13eBC0a1fEe2F7E5A1809712957229B70fd77BF2",
+      "startBlock": 10116535
+    },
+    "WinkToken": {
+      "address": "0xa1c10bff87d045a44505bc2a8e3854b328a42b4c",
+      "startBlock": 10357682
+    },
+    "Auction": {
+      "address": "0x4a585b182dc8ca3e40b429a20b9716e55981f95b",
+      "startBlock": 10644172
+    },
+    "RechargeContract": {
+      "address": "0x9BD0AdC069F696032d751E6B28acEc29AD90E9A0",
+      "startBlock": 10692183
+    },
+    "MysteryBox": {
+      "address": "0xfe56b94061c92cb15dbf28d8aad54e93f8fc05f2",
+      "startBlock": 10644841
     }
+  },
+  "bsctest": {
+  },
+  "shasta": {
+  },
+  "mainnet": {
+  },
+  "bsc": {
+  },
+  "tron": {
   }
 }
