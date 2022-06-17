@@ -24,7 +24,7 @@ type Owner @entity {
     erc20_balance: [ERC20_Balance!]! @derivedFrom(field: "owner")
 
     """上架道具"""
-    actions:[Auction!]! @derivedFrom(field: "seller")
+    action_infos:[AuctionInfo!]! @derivedFrom(field: "seller")
 
     """充值记录"""
     recharges: [Recharge!]! @derivedFrom(field: "to")
@@ -50,6 +50,9 @@ type ERC721_Token @entity {
     auction_cancelled:[Auction_Cancelled!]! @derivedFrom(field: "token")
     """成交记录"""
     auction_successful:[Auction_Successful!]! @derivedFrom(field: "token")
+#    """当前挂售信息"""
+#    auction_info: AuctionInfo! @derivedFrom(field: "token")
+
 }
 
 type ERC721_Contract @entity {
@@ -142,14 +145,24 @@ type ERC20_Balance @entity {
     id: ID!
     """持有量"""
     amount: BigInt!
+    """合约地址"""
     tokenAddress: Bytes! # address
     """拥有者"""
     owner: Owner!
 }
 
-###Auction
+type ERC721_Balance @entity {
+    id: ID!
+    """持有量"""
+    amount: BigInt!
+    """合约地址"""
+    tokenAddress: Bytes! # address
+    """拥有者"""
+    owner: Owner!
+}
 
-type Auction @entity {
+
+type AuctionInfo @entity {
     id: ID!
     """合约信息"""
     contract: ERC721_Contract!
@@ -157,14 +170,22 @@ type Auction @entity {
     token:ERC721_Token!
     """挂牌者"""
     seller: Owner!
+    """购买者"""
+    winner: Owner!
     """挂牌时长"""
     duration: BigInt! # uint256
     """起始价"""
     starting_price: BigInt! # uint256
     """结束价"""
     ending_price: BigInt! # uint256
-    """时间戳"""
-    timestamp: BigInt!
+    """上架时间戳"""
+    started_timestamp: BigInt!
+    """下架时间戳"""
+    cancelled_timestamp: BigInt!
+    """成交时间戳"""
+    successful_timestamp: BigInt!
+    """成交价"""
+    total_price: BigInt!
 }
 
 type Auction_Created @entity {

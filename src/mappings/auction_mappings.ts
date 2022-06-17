@@ -15,6 +15,7 @@ import {
     Auction_Day,
     Auction_Week,
     Auction_Month,
+    AuctionInfo
 } from "../../generated/schema"
 
 import {BigInt, BigDecimal, Address} from '@graphprotocol/graph-ts'
@@ -37,6 +38,12 @@ export function handleAuctionCancelled(event: AuctionCancelledEvent): void {
     entity.save()
 
 
+    let auction_id = event.params._nftAddress.toHexString().concat(':').concat(event.params._tokenId.toHexString());
+    let auction_info = AuctionInfo.load(auction_id);
+    if (auction_info) {
+        auction_info.cancelled_timestamp = event.block.timestamp;
+        auction_info.save();
+    }
 }
 
 export function handleAuctionCreated(event: AuctionCreatedEvent): void {
@@ -113,6 +120,25 @@ export function handleAuctionCreated(event: AuctionCreatedEvent): void {
     week.save();
     month.save()
     alldays.save();
+
+    let auction_id = event.params._nftAddress.toHexString().concat(':').concat(event.params._tokenId.toHexString());
+    let auction_info = AuctionInfo.load(auction_id);
+    if (!auction_info) {
+        auction_info = new AuctionInfo(auction_id)
+    }
+    auction_info.token = event.params._tokenId.toHexString();
+    auction_info.contract = event.params._nftAddress.toHexString();
+    auction_info.duration = event.params._duration;
+    auction_info.seller = event.params._seller.toHexString();
+    auction_info.winner  ="";
+    auction_info.starting_price = event.params._startingPrice;
+    auction_info.ending_price = event.params._endingPrice;
+    auction_info.started_timestamp =  event.block.timestamp;
+    auction_info.cancelled_timestamp = ZERO_BI;
+    auction_info.successful_timestamp = ZERO_BI;
+    auction_info.total_price=ZERO_BI;
+
+    auction_info.save();
 
 }
 
@@ -197,6 +223,14 @@ export function handleAuctionSuccessful(event: AuctionSuccessfulEvent): void {
     week.save();
     month.save()
     alldays.save();
+
+    let auction_id = event.params._nftAddress.toHexString().concat(':').concat(event.params._tokenId.toHexString());
+    let auction_info = AuctionInfo.load(auction_id);
+    if (auction_info) {
+        auction_info.successful_timestamp = event.block.timestamp;
+        auction_info.total_price = event.params._totalPrice;
+        auction_info.save();
+    }
 
 }
 

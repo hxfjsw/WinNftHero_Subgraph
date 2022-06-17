@@ -112,6 +112,7 @@ dataSources:
         - AuctionCreated
         - AuctionSuccessful
         - OwnershipTransferred
+        - AuctionInfo
         - Paused
         - Unpaused
       abis:
