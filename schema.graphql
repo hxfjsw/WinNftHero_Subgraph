@@ -193,6 +193,26 @@ type MysteryBoxExchange  @entity {
     """
     id: ID!
     """
+    基因
+    """
+    genes: BigInt! # uint256
+    """
+    盲盒ID
+    """
+    token_id: BigInt! # uint256
+    """
+    兑换后产生的NFT合约ID
+    """
+    nft_token_id: BigInt! # uint256
+    """
+    兑换发起者
+    """
+    from: Bytes! # address
+    """
+    兑换目标合约地址
+    """
+    nft_address: Bytes! # address
+    """
     时间戳
     """
     timestamp: BigInt!
