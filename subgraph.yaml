@@ -96,7 +96,7 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
 
-  - kind: ethereum
+  - kind: ethereum/contract
     name: Auction
     network: rinkeby
     source:
@@ -132,13 +132,13 @@ dataSources:
           handler: handleUnpaused
       file: ./src/mappings/auction_mappings.ts
 
-  - kind: ethereum
+  - kind: ethereum/contract
     name: RechargeContract
     network: rinkeby
     source:
-      address: "0x4a585b182dc8ca3e40b429a20b9716e55981f95b"
+      address: "0x9BD0AdC069F696032d751E6B28acEc29AD90E9A0"
       abi: RechargePay
-      startBlock: 10644172
+      startBlock: 10692183
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
