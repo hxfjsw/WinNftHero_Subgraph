@@ -6,8 +6,8 @@ dataSources:
     name: WinNftHero
     network: rinkeby
     source:
+      address: '0x7b5a201e0b5c405288986deb876fed7efce0bed5'
       abi: ERC721
-      address: "0x7b5a201e0b5c405288986deb876fed7efce0bed5"
       startBlock: 10644199
     mapping:
       kind: ethereum/events
@@ -25,12 +25,13 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/mappings/hero_mappings.ts
+
   - kind: ethereum/contract
     name: WinNftHeroEquip
     network: rinkeby
     source:
+      address: '0x748f5cd3989849f3cb96c84c6f5d3c132f6e6623'
       abi: ERC721
-      address: "0x748f5cd3989849f3cb96c84c6f5d3c132f6e6623"
       startBlock: 10644202
     mapping:
       kind: ethereum/events
@@ -48,6 +49,7 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/mappings/hero_mappings.ts
+
   - kind: ethereum/contract
     name: ApeNftToken
     network: rinkeby
@@ -70,6 +72,7 @@ dataSources:
           handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
+
   - kind: ethereum/contract
     name: WinkToken
     network: rinkeby
@@ -92,12 +95,13 @@ dataSources:
           handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
+
   - kind: ethereum/contract
     name: Auction
     network: rinkeby
     source:
-      abi: Auction
       address: "0x4a585b182dc8ca3e40b429a20b9716e55981f95b"
+      abi: Auction
       startBlock: 10644172
     mapping:
       kind: ethereum/events
@@ -117,11 +121,9 @@ dataSources:
       eventHandlers:
         - event: AuctionCancelled(indexed address,indexed uint256)
           handler: handleAuctionCancelled
-        - event: AuctionCreated(indexed address,indexed
-            uint256,uint256,uint256,uint256,address)
+        - event: AuctionCreated(indexed address,indexed uint256,uint256,uint256,uint256,address)
           handler: handleAuctionCreated
-        - event: AuctionSuccessful(indexed address,indexed
-            uint256,uint256,address,address)
+        - event: AuctionSuccessful(indexed address,indexed uint256,uint256,address,address)
           handler: handleAuctionSuccessful
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
@@ -130,12 +132,13 @@ dataSources:
         - event: Unpaused(address)
           handler: handleUnpaused
       file: ./src/mappings/auction_mappings.ts
+
   - kind: ethereum/contract
     name: RechargeContract
     network: rinkeby
     source:
-      abi: RechargePay
       address: "0x9BD0AdC069F696032d751E6B28acEc29AD90E9A0"
+      abi: RechargePay
       startBlock: 10692183
     mapping:
       kind: ethereum/events
@@ -159,12 +162,13 @@ dataSources:
         - event: Unpaused(address)
           handler: handleUnpaused
       file: ./src/mappings/recharge_mappings.ts
+
   - kind: ethereum
     name: MysteryBox
     network: rinkeby
     source:
-      abi: MysteryBox
       address: "0xfe56b94061c92cb15dbf28d8aad54e93f8fc05f2"
+      abi: MysteryBox
       startBlock: 10644841
     mapping:
       kind: ethereum/events
