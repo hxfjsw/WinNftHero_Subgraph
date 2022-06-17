@@ -1,6 +1,25 @@
-import { log, BigInt } from '@graphprotocol/graph-ts';
+import {log, BigInt, Address} from '@graphprotocol/graph-ts';
 import { ERC721, Transfer as TransferEvent } from '../../generated/WinNftHero/ERC721';
-import { ERC721_Token, Owner, ERC721_Contract, ERC721_Transfer } from '../../generated/schema';
+import {
+  ERC721_Token,
+  Owner,
+  ERC721_Contract,
+  ERC721_Transfer,
+  ERC721_Balance
+} from '../../generated/schema';
+import {ERC20} from "../../generated/ApeNftToken/ERC20";
+
+
+export function getBalance(userAddress: Address, tokenAddress: Address): ERC721_Balance {
+  let id = userAddress.toHexString().concat("-").concat(tokenAddress.toHexString());
+
+  let balance = ERC721_Balance.load(id);
+  if (balance == null) {
+    balance = new ERC721_Balance(id);
+  }
+  return balance as ERC721_Balance;
+
+}
 
 export function handleTransfer(event: TransferEvent): void {
   log.debug('Transfer detected. From: {} | To: {} | TokenID: {}', [
@@ -87,4 +106,22 @@ export function handleTransfer(event: TransferEvent): void {
   token.save();
   contract.save();
   transfer.save();
+
+  let address = event.address;
+
+  let erc721 = ERC721.bind(address);
+  let balance_from = erc721.try_balanceOf(event.params.from);
+  let balance_to = erc721.try_balanceOf(event.params.to);
+
+  let balance_from_entity = getBalance(event.params.from, address)
+  balance_from_entity.owner = event.params.from.toHexString();
+  balance_from_entity.tokenAddress = address;
+  balance_from_entity.amount = balance_from.reverted ? BigInt.fromI32(0) : balance_from.value;
+  balance_from_entity.save()
+
+  let balance_to_entity = getBalance(event.params.to, address)
+  balance_to_entity.owner = event.params.to.toHexString();
+  balance_to_entity.tokenAddress = address;
+  balance_to_entity.amount = balance_to.reverted ? BigInt.fromI32(0) : balance_to.value;
+  balance_to_entity.save()
 }

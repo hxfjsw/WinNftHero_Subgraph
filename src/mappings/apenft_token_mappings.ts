@@ -113,7 +113,7 @@ export function handleTransfer(event: TransferEvent): void {
     let balance_to_entity = getBalance(event.params.to, address)
     balance_to_entity.owner = toUser.id;
     balance_to_entity.tokenAddress = address;
-    balance_to_entity.amount = balance_from.reverted ? BigInt.fromI32(0) : balance_to.value;
+    balance_to_entity.amount = balance_to.reverted ? BigInt.fromI32(0) : balance_to.value;
     balance_to_entity.save()
 }
 
