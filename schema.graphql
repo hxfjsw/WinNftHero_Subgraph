@@ -35,15 +35,15 @@ type Owner @entity {
 ##ERC721
 
 type ERC721_Token @entity {
-
+    """NFT的ID"""
     id: ID!
-
+    """此NFT的持有者"""
     owner: Owner
-
+    """metadata链接"""
     uri: String
-
+    """所有转账记录"""
     transfers: [ERC721_Transfer!]! @derivedFrom(field: "token")
-
+    """合约信息"""
     contract: ERC721_Contract
 }
 
@@ -52,22 +52,28 @@ type ERC721_Contract @entity {
     id: ID!
     """名字"""
     name: String
+    """代号"""
     symbol: String
+    """发行量"""
     totalSupply: BigInt
+    """所有NFT"""
     mintedTokens: [ERC721_Token!]! @derivedFrom(field: "contract")
 }
 
 type ERC721_Transfer @entity {
     """交易号（TXID）"""
     id: ID!
+    """NFT信息"""
     token: ERC721_Token!
-    # Empty from is minting
+    """发送者"""
     from: Owner
-    # Empty to is burning
+    """接收者"""
     to: Owner
     """时间戳"""
     timestamp: BigInt!
+    """区块号"""
     block: BigInt!
+    """交易号"""
     transactionHash: String!
 }
 
