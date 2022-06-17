@@ -26,7 +26,7 @@ export function handleexchange(event: exchangeEvent): void {
 
   entity.genes = event.params.genes;
   entity.token_id = event.params.tokenId;
-  entity.from = event.params.spawner;
+  entity.from = event.params.spawner.toHexString();
   entity.nft_address = event.params.nft_address;
   entity.nft_token_id = event.params.nft_token_id;
   entity.timestamp = event.block.timestamp;

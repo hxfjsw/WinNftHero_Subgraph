@@ -20,7 +20,7 @@ dataSources:
         - Transfer
       abis:
         - name: ERC721
-          file: ./abis/ERC721.json
+          file: ./abis/ERC721Genes.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
@@ -44,7 +44,7 @@ dataSources:
         - Transfer
       abis:
         - name: ERC721
-          file: ./abis/ERC721.json
+          file: ./abis/ERC721Genes.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer

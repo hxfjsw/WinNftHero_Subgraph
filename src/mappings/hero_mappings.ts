@@ -7,7 +7,8 @@ import {
   ERC721_Transfer,
   ERC721_Balance
 } from '../../generated/schema';
-import {ERC20} from "../../generated/ApeNftToken/ERC20";
+
+import {ZERO_BI,ZERO_BD} from "../helpers/const";
 
 
 export function getBalance(userAddress: Address, tokenAddress: Address): ERC721_Balance {
@@ -63,6 +64,8 @@ export function handleTransfer(event: TransferEvent): void {
   if (token == null) {
     token = new ERC721_Token(event.params.tokenId.toHexString());
     token.contract = event.address.toHexString();
+    let axie= instance.try_getAxie(event.params.tokenId);
+    token.genes =axie.reverted?ZERO_BI : axie.value.value0;
 
     let uri = instance.try_tokenURI(event.params.tokenId);
     if (!uri.reverted) {

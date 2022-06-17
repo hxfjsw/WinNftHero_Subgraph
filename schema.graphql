@@ -38,6 +38,8 @@ type ERC721_Token @entity {
     id: ID!
     """此NFT的持有者"""
     owner: Owner
+    """基因"""
+    genes:BigInt!
     """metadata链接"""
     uri: String
     """所有转账记录"""
@@ -299,7 +301,7 @@ type MysteryBoxExchange  @entity {
     """兑换后产生的NFT合约ID"""
     nft_token_id: BigInt! # uint256
     """兑换发起者"""
-    from: Bytes! # address
+    from: Owner!
     """兑换目标合约地址"""
     nft_address: Bytes! # address
     """时间戳"""

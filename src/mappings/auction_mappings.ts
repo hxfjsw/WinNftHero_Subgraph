@@ -18,10 +18,7 @@ import {
     AuctionInfo
 } from "../../generated/schema"
 
-import {BigInt, BigDecimal, Address} from '@graphprotocol/graph-ts'
-
-export let ZERO_BD = BigDecimal.fromString('0')
-export let ZERO_BI = BigInt.fromI32(0)
+import {ZERO_BI, ADDRESS_ZERO} from "../helpers/const";
 
 
 export function handleAuctionCancelled(event: AuctionCancelledEvent): void {
@@ -130,13 +127,13 @@ export function handleAuctionCreated(event: AuctionCreatedEvent): void {
     auction_info.contract = event.params._nftAddress.toHexString();
     auction_info.duration = event.params._duration;
     auction_info.seller = event.params._seller.toHexString();
-    auction_info.winner  ="";
+    auction_info.winner = ADDRESS_ZERO;
     auction_info.starting_price = event.params._startingPrice;
     auction_info.ending_price = event.params._endingPrice;
-    auction_info.started_timestamp =  event.block.timestamp;
+    auction_info.started_timestamp = event.block.timestamp;
     auction_info.cancelled_timestamp = ZERO_BI;
     auction_info.successful_timestamp = ZERO_BI;
-    auction_info.total_price=ZERO_BI;
+    auction_info.total_price = ZERO_BI;
 
     auction_info.save();
 
