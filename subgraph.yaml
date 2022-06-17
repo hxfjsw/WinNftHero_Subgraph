@@ -161,3 +161,33 @@ dataSources:
         - event: Unpaused(address)
           handler: handleUnpaused
       file: ./src/mappings/recharge_mappings.ts
+
+  - kind: ethereum
+    name: MysteryBox
+    network: rinkeby
+    source:
+      address: "0xfe56b94061c92cb15dbf28d8aad54e93f8fc05f2"
+      abi: MysteryBox
+      startBlock: 10644841
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - Paused
+        - Unpaused
+        - exchange
+      abis:
+        - name: MysteryBox
+          file: ./abis/MysteryBox.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Paused(address)
+          handler: handlePaused
+        - event: Unpaused(address)
+          handler: handleUnpaused
+        - event: exchange(indexed uint256,uint256,address,uint256,address)
+          handler: handleexchange
+      file: ./src/mappings/mysterybox_mappins.ts

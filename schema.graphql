@@ -184,3 +184,16 @@ type Recharge  @entity {
     """
     timestamp: BigInt!
 }
+
+
+"盲盒记录"
+type MysteryBoxExchange  @entity {
+    """
+    交易号（TXID）
+    """
+    id: ID!
+    """
+    时间戳
+    """
+    timestamp: BigInt!
+}
