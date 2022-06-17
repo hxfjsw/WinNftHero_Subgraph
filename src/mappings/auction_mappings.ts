@@ -50,7 +50,7 @@ export function handleAuctionCreated(event: AuctionCreatedEvent): void {
     entity.startingPrice = event.params._startingPrice;
     entity.endingPrice = event.params._endingPrice;
     entity.tokenId = event.params._tokenId;
-    entity.nftAddress = event.params._nftAddress;
+    entity.contract = event.params._nftAddress.toHexString();
     entity.timestamp = event.block.timestamp;
     entity.save()
 

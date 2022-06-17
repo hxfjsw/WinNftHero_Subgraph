@@ -58,6 +58,8 @@ type ERC721_Contract @entity {
     totalSupply: BigInt
     """所有NFT"""
     mintedTokens: [ERC721_Token!]! @derivedFrom(field: "contract")
+    """上架记录"""
+    auction_created:[Auction_Created!]! @derivedFrom(field: "contract")
 }
 
 type ERC721_Transfer @entity {
@@ -152,7 +154,9 @@ type Auction @entity {
 type Auction_Created @entity {
     """交易号（TXID）"""
     id: ID!
-    nftAddress: Bytes! # address
+    """合约信息"""
+    contract: ERC721_Contract!
+    """NFT的ID"""
     tokenId: BigInt! # uint256
     """挂牌者"""
     seller: Bytes! # address
@@ -170,6 +174,7 @@ type Auction_Successful @entity {
     """交易号（TXID）"""
     id: ID!
     nftAddress: Bytes! # address
+    """NFT的ID"""
     tokenId: BigInt! # uint256
     """时间戳"""
     timestamp: BigInt!
@@ -184,6 +189,7 @@ type Auction_Successful @entity {
 type Auction_Cancelled @entity {
     """交易号（TXID）"""
     id: ID!
+
     nftAddress: Bytes! # address
     """NFT的ID"""
     tokenId: BigInt! # uint256
