@@ -24,10 +24,10 @@ export let ZERO_BI = BigInt.fromI32(0)
 
 
 export function handleAuctionCancelled(event: AuctionCancelledEvent): void {
-    let entity = Auction_Cancelled.load(event.transaction.from.toHex())
+    let entity = Auction_Cancelled.load(event.transaction.hash.toHex())
 
     if (!entity) {
-        entity = new Auction_Cancelled(event.transaction.from.toHex())
+        entity = new Auction_Cancelled(event.transaction.hash.toHex())
     }
 
     entity.nftAddress = event.params._nftAddress;
@@ -39,10 +39,10 @@ export function handleAuctionCancelled(event: AuctionCancelledEvent): void {
 
 export function handleAuctionCreated(event: AuctionCreatedEvent): void {
 
-    let entity = Auction_Created.load(event.transaction.from.toHex())
+    let entity = Auction_Created.load(event.transaction.hash.toHex())
 
     if (!entity) {
-        entity = new Auction_Created(event.transaction.from.toHex())
+        entity = new Auction_Created(event.transaction.hash.toHex())
     }
 
     entity.seller = event.params._seller;
@@ -115,10 +115,10 @@ export function handleAuctionCreated(event: AuctionCreatedEvent): void {
 }
 
 export function handleAuctionSuccessful(event: AuctionSuccessfulEvent): void {
-    let entity = Auction_Successful.load(event.transaction.from.toHex())
+    let entity = Auction_Successful.load(event.transaction.hash.toHex())
 
     if (!entity) {
-        entity = new Auction_Successful(event.transaction.from.toHex())
+        entity = new Auction_Successful(event.transaction.hash.toHex())
     }
 
     entity.seller = event.params._seller;

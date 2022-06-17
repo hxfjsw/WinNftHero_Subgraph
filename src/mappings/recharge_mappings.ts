@@ -15,10 +15,10 @@ export function handlePaused(event: Paused): void {
 
 export function handleRecharge(event: RechargeEvent): void {
 
-    let entity = Recharge.load(event.transaction.from.toHex())
+    let entity = Recharge.load(event.transaction.hash.toHex())
 
     if (!entity) {
-        entity = new Recharge(event.transaction.from.toHex())
+        entity = new Recharge(event.transaction.hash.toHex())
     }
 
     entity.from = event.params.from;

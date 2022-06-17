@@ -152,12 +152,35 @@ type Auction_Month  @entity {
     totalSold: BigInt! # uint256
 }
 
+
+"充值记录"
 type Recharge  @entity {
+    """
+    交易号（TXID）
+    """
     id: ID!
+    """
+    付费者钱包地址
+    """
     from: Bytes! # address
+    """
+    目标钱包地址
+    """
     to: Bytes! # address
+    """
+    金额
+    """
     amount: BigInt! # uint256
+    """
+    订单号
+    """
     order_id: BigInt! # uint256
+    """
+    ERC20合约地址 元币为空地址
+    """
     token: Bytes! # address
+    """
+    时间戳
+    """
     timestamp: BigInt!
 }
