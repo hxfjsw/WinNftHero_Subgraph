@@ -30,8 +30,8 @@ export function handleAuctionCancelled(event: AuctionCancelledEvent): void {
         entity = new Auction_Cancelled(event.transaction.hash.toHex())
     }
 
-    entity.nftAddress = event.params._nftAddress;
-    entity.tokenId = event.params._tokenId;
+    entity.contract = event.params._nftAddress.toHexString();
+    entity.token_id = event.params._tokenId.toHexString();
     entity.timestamp = event.block.timestamp;
 
     entity.save()
@@ -49,7 +49,7 @@ export function handleAuctionCreated(event: AuctionCreatedEvent): void {
     entity.duration = event.params._duration;
     entity.startingPrice = event.params._startingPrice;
     entity.endingPrice = event.params._endingPrice;
-    entity.tokenId = event.params._tokenId;
+    entity.token_id = event.params._tokenId.toHexString();
     entity.contract = event.params._nftAddress.toHexString();
     entity.timestamp = event.block.timestamp;
     entity.save()
@@ -124,8 +124,8 @@ export function handleAuctionSuccessful(event: AuctionSuccessfulEvent): void {
     entity.seller = event.params._seller;
     entity.winer = event.params._winner;
     entity.totalPrice = event.params._totalPrice;
-    entity.tokenId = event.params._tokenId;
-    entity.nftAddress = event.params._nftAddress;
+    entity.token_id = event.params._tokenId.toHexString();
+    entity.contract = event.params._nftAddress.toHexString();
     entity.timestamp = event.block.timestamp;
     entity.save()
 
