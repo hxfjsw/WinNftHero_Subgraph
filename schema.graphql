@@ -52,8 +52,8 @@ type ERC721_Token @entity {
     auction_cancelled:[Auction_Cancelled!]! @derivedFrom(field: "token")
     """成交记录"""
     auction_successful:[Auction_Successful!]! @derivedFrom(field: "token")
-#    """当前挂售信息"""
-#    auction_info: AuctionInfo! @derivedFrom(field: "token")
+    """当前挂售信息"""
+    auction_info: AuctionInfo! @derivedFrom(field: "token")
 
 }
 
