@@ -60,6 +60,34 @@
     }
   },
   "shasta": {
+    "WinNftHero": {
+      "address": "0xb00c41af63aec5c30b38444a922ad48ace9ccd85",
+      "startBlock": 0
+    },
+    "WinNftHeroEquip": {
+      "address": "0x85174f0b92b82043c1a34a6696afd73fedb8a12a",
+      "startBlock": 0
+    },
+    "ApeNftToken": {
+      "address": "0x7c188a52c895ad72e16d1edded4749f2c28700c5",
+      "startBlock": 0
+    },
+    "WinkToken": {
+      "address": "0xb00c41af63aec5c30b38444a922ad48ace9ccd85",
+      "startBlock": 0
+    },
+    "Auction": {
+      "address": "0xc3c3500153247a647766a6e1cc6362ecc0c14699",
+      "startBlock": 0
+    },
+    "RechargeContract": {
+      "address": "0x3ef0028309f132c869a5c73e2a159e0be91b3557",
+      "startBlock": 0
+    },
+    "MysteryBox": {
+      "address": "0x418e8b1172669f84f4183c0cbb11b2a7b95ab453",
+      "startBlock": 0
+    }
   },
   "mainnet": {
   },
