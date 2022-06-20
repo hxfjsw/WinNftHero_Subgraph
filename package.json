@@ -7,7 +7,10 @@
     "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ winnfthero_rinkeby",
     "create-local": "graph create --node http://localhost:8020/ winnfthero_rinkeby",
     "remove-local": "graph remove --node http://localhost:8020/ winnfthero_rinkeby",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 winnfthero_rinkeby"
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 winnfthero_rinkeby",
+
+    "create-private": "graph create  --network bsctest --node http://3.89.249.212:8020/ winnfthero_bsctest",
+    "deploy-private": "graph deploy  --network bsctest --node http://3.89.249.212:8020/ --ipfs http://3.89.249.212:5001 winnfthero_bsctest"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.30.4",
