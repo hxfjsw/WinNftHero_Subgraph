@@ -70,11 +70,11 @@
     },
     "ApeNftToken": {
       "address": "0x7c188a52c895ad72e16d1edded4749f2c28700c5",
-      "startBlock": 18293947
+      "startBlock": 24331337
     },
     "WinkToken": {
       "address": "0xb00c41af63aec5c30b38444a922ad48ace9ccd85",
-      "startBlock": 19088558
+      "startBlock": 24331337
     },
     "Auction": {
       "address": "0xc3c3500153247a647766a6e1cc6362ecc0c14699",

@@ -9,8 +9,8 @@
     "remove-local": "graph remove --node http://localhost:8020/ winnfthero_rinkeby",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 winnfthero_rinkeby",
 
-    "create-private": "graph create  --network bsctest --node http://3.89.249.212:8020/ winnfthero_bsctest",
-    "deploy-private": "graph deploy  --network bsctest --node http://3.89.249.212:8020/ --ipfs http://3.89.249.212:5001 winnfthero_bsctest"
+    "create-private": "graph create  --node http://54.235.48.92:8020/ winnfthero_shasta",
+    "deploy-private": "graph deploy  --node http://54.235.48.92:8020/ --ipfs http://54.235.48.92:5001 winnfthero_shasta"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.30.4",

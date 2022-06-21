@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: WinNftHero
-    network: chapel
+    network: shasta
     source:
       abi: ERC721
-      address: "0xc3cd3f5d2e512ccd509db13a32e335a0fb1e4d87"
-      startBlock: 18890816
+      address: "0xed236ce8c0f6db2a152a3f7cded291891ec4e4c3"
+      startBlock: 24331358
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -27,11 +27,11 @@ dataSources:
       file: ./src/mappings/hero_mappings.ts
   - kind: ethereum/contract
     name: WinNftHeroEquip
-    network: chapel
+    network: shasta
     source:
       abi: ERC721
-      address: "0xf0670dc4c7b64896dc039d81e38b0928ef348819"
-      startBlock: 18891117
+      address: "0x85174f0b92b82043c1a34a6696afd73fedb8a12a"
+      startBlock: 24331366
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -50,11 +50,11 @@ dataSources:
       file: ./src/mappings/hero_mappings.ts
   - kind: ethereum/contract
     name: ApeNftToken
-    network: chapel
+    network: shasta
     source:
       abi: ERC20
-      address: "0x0073580275993bce7a61cb9952b7717ceb2ee72b"
-      startBlock: 14071314
+      address: "0x7c188a52c895ad72e16d1edded4749f2c28700c5"
+      startBlock: 24331337
     mapping:
       file: ./src/mappings/apenft_token_mappings.ts
       kind: ethereum/events
@@ -72,11 +72,11 @@ dataSources:
           handler: handleTransfer
   - kind: ethereum/contract
     name: WinkToken
-    network: chapel
+    network: shasta
     source:
       abi: ERC20
-      address: "0xc730f312ab4c566dce27aeaf20ceaa8e7bfc3cb2"
-      startBlock: 14071295
+      address: "0xb00c41af63aec5c30b38444a922ad48ace9ccd85"
+      startBlock: 24331337
     mapping:
       file: ./src/mappings/wink_mappings.ts
       kind: ethereum/events
@@ -94,11 +94,11 @@ dataSources:
           handler: handleTransfer
   - kind: ethereum/contract
     name: Auction
-    network: chapel
+    network: shasta
     source:
       abi: Auction
-      address: "0xa3fc4186d98cf6084fa5208c4b34cbd069d492a0"
-      startBlock: 18891389
+      address: "0xc3c3500153247a647766a6e1cc6362ecc0c14699"
+      startBlock: 24331337
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -132,11 +132,11 @@ dataSources:
       file: ./src/mappings/auction_mappings.ts
   - kind: ethereum/contract
     name: RechargeContract
-    network: chapel
+    network: shasta
     source:
       abi: RechargePay
-      address: "0x3228e80fa653837a381b544f3f423afd287ab42c"
-      startBlock: 19149507
+      address: "0x3ef0028309f132c869a5c73e2a159e0be91b3557"
+      startBlock: 24331351
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -161,11 +161,11 @@ dataSources:
       file: ./src/mappings/recharge_mappings.ts
   - kind: ethereum
     name: MysteryBox
-    network: chapel
+    network: shasta
     source:
       abi: MysteryBox
-      address: "0xc15e58c6314ef467e28ad556e27fc01fd581ec3d"
-      startBlock: 19147560
+      address: "0x418e8b1172669f84f4183c0cbb11b2a7b95ab453"
+      startBlock: 24331366
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
