@@ -37,7 +37,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Token
+        - ERC721_Token
         - Owner
         - Contract
         - Transfer
